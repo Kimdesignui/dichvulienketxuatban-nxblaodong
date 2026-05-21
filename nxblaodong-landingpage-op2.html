@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dịch vụ Liên kết Xuất bản | NXB Lao Động</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --primary: #006ab1;
+      --primary-dark: #004f85;
+      --primary-light: #3399cc;
+      --primary-lighter: #e6f2fa;
+      --accent: #00b4d8;
+      --accent-light: #90e0ef;
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --glass-shadow: rgba(0, 106, 177, 0.15);
+      --glass-bg-dark: rgba(0, 106, 177, 0.08);
+      --glass-border-dark: rgba(0, 106, 177, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a2e;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ─── Glassmorphism Utilities ─── */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px var(--glass-shadow);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 106, 177, 0.12);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 106, 177, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .glass-card-light {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 106, 177, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 106, 177, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card-light:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 106, 177, 0.15);
+    }
+
+    .glass-btn {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .glass-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.3), 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ─── Navbar ─── */
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 106, 177, 0.08);
+      box-shadow: 0 4px 30px rgba(0, 106, 177, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-glass.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 30px rgba(0, 106, 177, 0.12);
+    }
+
+    .navbar-brand img {
+      height: 44px;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: #1a1a2e !important;
+      padding: 0.5rem 1rem !important;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-link:hover {
+      background: var(--primary-lighter);
+      color: var(--primary) !important;
+    }
+
+    .btn-nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff !important;
+      border: none;
+      padding: 0.55rem 1.5rem !important;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 106, 177, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 106, 177, 0.4);
+      color: #fff !important;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #003d66 0%, var(--primary) 35%, var(--primary-light) 65%, var(--accent) 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 180, 216, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+    }
+
+    .hero-orb-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent);
+      top: 15%;
+      right: 10%;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .hero-orb-2 {
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.15);
+      bottom: 20%;
+      left: 5%;
+      animation: float 9s ease-in-out infinite reverse;
+    }
+
+    .hero-orb-3 {
+      width: 150px;
+      height: 150px;
+      background: var(--primary-light);
+      top: 60%;
+      right: 30%;
+      animation: float 7s ease-in-out infinite 2s;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #fff, var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 540px;
+      line-height: 1.8;
+    }
+
+    .btn-hero-primary {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      padding: 0.85rem 2.2rem;
+      border-radius: 14px;
+      border: none;
+      font-size: 1.05rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      color: var(--primary-dark);
+    }
+
+    .btn-hero-secondary {
+      color: #fff;
+      font-weight: 600;
+      padding: 0.85rem 2.2rem;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      font-size: 1.05rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .btn-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.6);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .hero-glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-stat {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .hero-stat h3 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .hero-stat p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0;
+    }
+
+    /* ─── Hero Illustration ─── */
+    .hero-image-float {
+      position: absolute;
+      right: -5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 45%;
+      max-width: 550px;
+      border-radius: 24px;
+      opacity: 0.18;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-image-float { display: none; }
+    }
+
+    .about-img-wrapper {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,106,177,0.15);
+    }
+    .about-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-illustration {
+      position: relative;
+    }
+
+    .hero-illustration svg {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+    }
+
+    /* ─── Section Styles ─── */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title span {
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #6b7280;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    /* ─── About ─── */
+    .about-section {
+      background: linear-gradient(180deg, #f8fbff 0%, #fff 100%);
+      position: relative;
+    }
+
+    .about-icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+
+    /* ─── Services ─── */
+    .services-section {
+      background: #fff;
+      position: relative;
+    }
+
+    .service-main-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 106, 177, 0.1);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 106, 177, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .service-main-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 106, 177, 0.15);
+    }
+
+    .service-img-wrapper {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-img-wrapper .service-icon-large {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: rgba(0, 106, 177, 0.15);
+    }
+
+    .service-img-wrapper img,
+    .service-img-wrapper .service-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-body {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-body h4 {
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .service-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+
+    .service-body ul li {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-bottom: 0.7rem;
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .service-body ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    /* Old service card style kept for compatibility */
+    .service-card {
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, rgba(0, 106, 177, 0.1), rgba(0, 180, 216, 0.1));
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(0, 106, 177, 0.08);
+    }
+
+    .service-card h5 {
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+    }
+
+    .service-card p {
+      color: #6b7280;
+      font-size: 0.93rem;
+      margin: 0;
+    }
+
+    /* ─── Process ─── */
+    .process-section {
+      background: linear-gradient(180deg, #f0f7ff 0%, #f8fbff 100%);
+      position: relative;
+    }
+
+    .process-step {
+      position: relative;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      margin: 0 auto 1.2rem;
+      box-shadow: 0 8px 24px rgba(0, 106, 177, 0.25);
+    }
+
+    .process-step h5 {
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    .process-step p {
+      color: #6b7280;
+      font-size: 0.93rem;
+      margin: 0;
+    }
+
+    .process-connector {
+      position: absolute;
+      top: 28px;
+      right: -50%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-light), transparent);
+      z-index: 0;
+    }
+
+    /* ─── Stats ─── */
+    .stats-section {
+      background: linear-gradient(135deg, rgba(0,106,177,0.93) 0%, rgba(0,79,133,0.95) 100%), url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=400&fit=crop&crop=center') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .stat-item h3 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    /* ─── Audience ─── */
+    .audience-section {
+      background: #fff;
+    }
+
+    .audience-card {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .audience-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      background: linear-gradient(135deg, rgba(0, 106, 177, 0.08), rgba(0, 180, 216, 0.08));
+      color: var(--primary);
+      margin: 0 auto 1.2rem;
+    }
+
+    .audience-card h5 {
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 0.6rem;
+    }
+
+    .audience-card p {
+      color: #6b7280;
+      font-size: 0.93rem;
+      margin: 0;
+    }
+
+    /* ─── Why Publish ─── */
+    .why-section {
+      background: linear-gradient(135deg, rgba(0,61,102,0.93) 0%, rgba(0,106,177,0.9) 50%, rgba(51,153,204,0.88) 100%), url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=1200&h=600&fit=crop&crop=center') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-section::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 180, 216, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .why-section .section-title {
+      color: #fff;
+    }
+
+    .why-section .section-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .why-card {
+      padding: 2rem;
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .why-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      margin: 0 auto 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .why-card h5 {
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      font-size: 1.15rem;
+    }
+
+    .why-card p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0,61,102,0.92) 0%, rgba(0,106,177,0.9) 40%, rgba(51,153,204,0.88) 70%, rgba(0,180,216,0.9) 100%), url('https://images.unsplash.com/photo-1532012197267-da84d127e765?w=1200&h=600&fit=crop&crop=center') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cta-glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 28px;
+      padding: 3.5rem;
+    }
+
+    .cta-glass h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .cta-glass p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── Contact Form ─── */
+    .contact-section {
+      background: #fff;
+    }
+
+    .contact-form-glass {
+      background: rgba(0, 106, 177, 0.03);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 106, 177, 0.08);
+      border-radius: 24px;
+      padding: 3rem;
+    }
+
+    .form-control-glass {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 106, 177, 0.12);
+      border-radius: 12px;
+      padding: 0.85rem 1.2rem;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control-glass:focus {
+      background: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 106, 177, 0.1);
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      font-weight: 700;
+      padding: 0.85rem 2.5rem;
+      border-radius: 14px;
+      border: none;
+      font-size: 1.05rem;
+      box-shadow: 0 8px 24px rgba(0, 106, 177, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0, 106, 177, 0.4);
+      color: #fff;
+    }
+
+    .contact-info-card {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info-card i {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-right: 1rem;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      background: #0a1628;
+      color: #fff;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer h6 {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      color: #fff;
+    }
+
+    .footer p,
+    .footer a {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-right: 0.5rem;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .social-icon:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* ─── Animations ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── Equal-height cards ─── */
+    .equal-height-row > [class*="col"] {
+      display: flex;
+    }
+
+    .equal-height-row > [class*="col"] > .glass-card,
+    .equal-height-row > [class*="col"] > .glass-card-light {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 991.98px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-glass-card {
+        margin-top: 2rem;
+      }
+
+      section {
+        padding: 4rem 0;
+      }
+
+      .process-connector {
+        display: none;
+      }
+
+      .cta-glass {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .service-img-wrapper {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .hero {
+        padding-top: 100px;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .hero-glass-card {
+        padding: 1.5rem;
+      }
+
+      .contact-form-glass {
+        padding: 1.5rem;
+      }
+
+      .stat-item h3 {
+        font-size: 2.2rem;
+      }
+
+      .service-img-wrapper {
+        height: 160px;
+      }
+    }
+
+    /* ─── Scroll to top ─── */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      border: none;
+      box-shadow: 0 8px 24px rgba(0, 106, 177, 0.3);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 106, 177, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════ Navbar ═══════ -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-glass" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://images.nxblaodong.com.vn/avatar/image-20221214111957476.svg" alt="NXB Lao Động">
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto me-3 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#gioi-thieu">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dich-vu">Dịch vụ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quy-trinh">Quy trình</a></li>
+          <li class="nav-item"><a class="nav-link" href="#doi-tuong">Đối tượng</a></li>
+          <li class="nav-item"><a class="nav-link" href="#lien-he">Liên hệ</a></li>
+        </ul>
+        <a href="#lien-he" class="btn btn-nav-cta">Đăng ký ngay</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════ Hero ═══════ -->
+  <section class="hero" id="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&h=600&fit=crop&crop=center" alt="" class="hero-image-float" loading="eager">
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <p class="mb-3" style="color:rgba(255,255,255,0.7); font-weight:500; letter-spacing:2px; text-transform:uppercase; font-size:0.85rem;">
+            <i class="bi bi-book me-2"></i>NXB Lao Động — Thành lập 1945
+          </p>
+          <h1><span>Hiện thực hóa</span><br>cuốn sách của bạn</h1>
+          <p class="mb-4">
+            Nhà xuất bản Lao Động đồng hành cùng bạn trên hành trình từ ý tưởng đến ấn phẩm hoàn chỉnh — từ cấp giấy phép, biên tập, thiết kế, in ấn đến phát hành trên toàn quốc.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#lien-he" class="btn btn-hero-primary">
+              <i class="bi bi-send me-2"></i>Đăng ký tư vấn
+            </a>
+            <a href="#dich-vu" class="btn btn-hero-secondary">
+              <i class="bi bi-arrow-down-circle me-2"></i>Tìm hiểu thêm
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-glass-card">
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="hero-stat">
+                  <h3>80+</h3>
+                  <p>Năm hoạt động</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="hero-stat">
+                  <h3>10.000+</h3>
+                  <p>Đầu sách xuất bản</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="hero-stat">
+                  <h3>1.000+</h3>
+                  <p>Đối tác liên kết</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="hero-stat">
+                  <h3>100%</h3>
+                  <p>Hỗ trợ pháp lý</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ About ═══════ -->
+  <section class="about-section" id="gioi-thieu">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-semibold mb-2" style="color:var(--primary); letter-spacing:2px; font-size:0.8rem;">
+          Về chúng tôi
+        </p>
+        <h2 class="section-title">Nhà xuất bản <span>Lao Động</span></h2>
+        <p class="section-subtitle">
+          Một trong những nhà xuất bản lâu đời nhất Việt Nam, đồng hành cùng tri thức và phát triển.
+        </p>
+      </div>
+
+      <!-- 3 Cards: Lịch sử, Nhiệm vụ, Tầm nhìn -->
+      <div class="row g-4 equal-height-row">
+        <div class="col-lg-4 fade-in">
+          <div class="glass-card-light p-4 text-center">
+            <div class="about-icon-box mx-auto mb-3"><i class="bi bi-clock-history"></i></div>
+            <h4 class="fw-bold mb-3">Lịch sử</h4>
+            <p class="text-muted mb-0" style="line-height:1.9;">
+              Nhà xuất bản Lao Động được thành lập ngày <strong>1/11/1945</strong>, ngay sau ngày nước Việt Nam Dân chủ Cộng hoà ra đời chưa đầy hai tháng, với sứ mệnh truyền bá tri thức và nâng cao kỹ năng nghề nghiệp cho công nhân, người lao động. Trải qua hơn <strong>80 năm</strong> hoạt động, đã xuất bản hàng chục nghìn đầu sách đáp ứng nhu cầu của đông đảo độc giả.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 fade-in" style="transition-delay:0.15s;">
+          <div class="glass-card-light p-4 text-center">
+            <div class="about-icon-box mx-auto mb-3"><i class="bi bi-bullseye"></i></div>
+            <h4 class="fw-bold mb-3">Nhiệm vụ</h4>
+            <p class="text-muted mb-0" style="line-height:1.9;">
+              Là một trong những nhà xuất bản lâu đời nhất Việt Nam, Nhà xuất bản Lao Động tập trung vào các dòng sách cung cấp tri thức cho đối tượng <strong>công nhân, người lao động</strong> và <strong>tổ chức Công đoàn Việt Nam</strong> nói riêng và đông đảo độc giả.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 fade-in" style="transition-delay:0.3s;">
+          <div class="glass-card-light p-4 text-center">
+            <div class="about-icon-box mx-auto mb-3"><i class="bi bi-eye"></i></div>
+            <h4 class="fw-bold mb-3">Tầm nhìn</h4>
+            <p class="text-muted mb-0" style="line-height:1.9;">
+              Nhà xuất bản Lao Động được định hình để trở thành <strong>nhà xuất bản hàng đầu</strong> trong cung cấp các giá trị tinh thần và tri thức cho công nhân và người lao động, giúp công nhân và người lao động <strong>thích nghi và phát triển</strong> trong thế giới biến động, khó lường.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ Services (3 services from docx) ═══════ -->
+  <section class="services-section" id="dich-vu">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-semibold mb-2" style="color:var(--primary); letter-spacing:2px; font-size:0.8rem;">
+          Dịch vụ toàn diện
+        </p>
+        <h2 class="section-title"><span>Hiện thực hóa</span> cuốn sách của bạn</h2>
+        <p class="section-subtitle">
+          Chúng tôi cung cấp giải pháp xuất bản trọn gói, từ cấp giấy phép đến phát hành và sản xuất ấn phẩm điện tử.
+        </p>
+      </div>
+      <div class="row g-4 equal-height-row">
+        <!-- Service 1: Cấp giấy phép xuất bản -->
+        <div class="col-lg-4 col-md-6 fade-in">
+          <div class="service-main-card">
+            <div class="service-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop&crop=center" alt="Cấp giấy phép xuất bản" class="service-photo" loading="lazy">
+            </div>
+            <div class="service-body">
+              <h4><i class="bi bi-file-earmark-check text-primary me-2"></i>Cấp giấy phép xuất bản</h4>
+              <ul>
+                <li>Quy trình, thủ tục cấp giấy phép rõ ràng, minh bạch</li>
+                <li>Tiến độ thẩm định, cấp phép nhanh chóng, đơn giản</li>
+                <li>Lĩnh vực cấp phép đa dạng</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Service 2: Xuất bản cuốn sách của riêng bạn -->
+        <div class="col-lg-4 col-md-6 fade-in" style="transition-delay:0.15s;">
+          <div class="service-main-card">
+            <div class="service-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&h=400&fit=crop&crop=center" alt="Xuất bản sách" class="service-photo" loading="lazy">
+            </div>
+            <div class="service-body">
+              <h4><i class="bi bi-journal-richtext text-primary me-2"></i>Xuất bản cuốn sách của riêng bạn</h4>
+              <ul>
+                <li>Tư vấn thủ tục xuất bản, hạn chế các rủi ro liên quan đến thủ tục xuất bản</li>
+                <li>Đồng hành hoàn thiện bản thảo: biên tập, dàn trang, thiết kế bìa, vẽ minh họa,…</li>
+                <li>In ấn chuyên nghiệp phù hợp với mọi nhu cầu</li>
+                <li>Kết nối phát hành</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Service 3: Sản xuất ấn phẩm điện tử -->
+        <div class="col-lg-4 col-md-12 fade-in" style="transition-delay:0.3s;">
+          <div class="service-main-card">
+            <div class="service-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1609895314390-cb64c186466a?w=600&h=400&fit=crop&crop=center" alt="Ấn phẩm điện tử" class="service-photo" loading="lazy">
+            </div>
+            <div class="service-body">
+              <h4><i class="bi bi-phone text-primary me-2"></i>Sản xuất ấn phẩm điện tử</h4>
+              <ul>
+                <li>Sản xuất các sản phẩm số hóa với nhiều định dạng truy cập trực tiếp trên các thiết bị thông minh: ebook, audio book, multimedia</li>
+                <li>Nền tảng đọc sách tiên tiến, thân thiện với người đọc</li>
+                <li>Kênh phát hành sách điện tử chính thống</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ Process ═══════ -->
+  <section class="process-section" id="quy-trinh">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-semibold mb-2" style="color:var(--primary); letter-spacing:2px; font-size:0.8rem;">
+          Đơn giản & Minh bạch
+        </p>
+        <h2 class="section-title">Quy trình <span>Xuất bản</span></h2>
+        <p class="section-subtitle">
+          Chỉ 5 bước đơn giản để biến bản thảo của bạn thành sách hoàn chỉnh.
+        </p>
+      </div>
+      <div class="row g-4 equal-height-row">
+        <div class="col-lg col-md-6 fade-in">
+          <div class="glass-card-light process-step">
+            <div class="step-number">01</div>
+            <h5>Tiếp nhận bản thảo</h5>
+            <p>Gửi bản thảo hoặc ý tưởng sách. Đội ngũ tư vấn sẽ đánh giá và phản hồi nhanh chóng.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6 fade-in" style="transition-delay:0.1s;">
+          <div class="glass-card-light process-step">
+            <div class="step-number">02</div>
+            <h5>Đăng ký đề tài</h5>
+            <p>Lập hồ sơ, đăng ký đề tài xuất bản với cơ quan quản lý Nhà nước.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6 fade-in" style="transition-delay:0.2s;">
+          <div class="glass-card-light process-step">
+            <div class="step-number">03</div>
+            <h5>Biên tập & Thiết kế</h5>
+            <p>Biên tập nội dung, thiết kế bìa, dàn trang và hoàn thiện bản in thử.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6 fade-in" style="transition-delay:0.3s;">
+          <div class="glass-card-light process-step">
+            <div class="step-number">04</div>
+            <h5>In ấn & Nộp lưu chiểu</h5>
+            <p>In ấn theo số lượng thỏa thuận, nộp lưu chiểu theo quy định.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6 fade-in" style="transition-delay:0.4s;">
+          <div class="glass-card-light process-step">
+            <div class="step-number">05</div>
+            <h5>Phát hành</h5>
+            <p>Phân phối sách đến hệ thống nhà sách và các kênh bán hàng toàn quốc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ Stats ═══════ -->
+  <section class="stats-section">
+    <div class="container position-relative">
+      <div class="row g-4">
+        <div class="col-6 col-lg-3 fade-in">
+          <div class="stat-item">
+            <h3 class="counter" data-target="80">0</h3>
+            <p>Năm kinh nghiệm</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3 fade-in" style="transition-delay:0.1s;">
+          <div class="stat-item">
+            <h3 class="counter" data-target="10000">0</h3>
+            <p>Đầu sách xuất bản</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3 fade-in" style="transition-delay:0.2s;">
+          <div class="stat-item">
+            <h3 class="counter" data-target="1000">0</h3>
+            <p>Đối tác liên kết</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3 fade-in" style="transition-delay:0.3s;">
+          <div class="stat-item">
+            <h3 class="counter" data-target="63">0</h3>
+            <p>Tỉnh thành phát hành</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ Audience ═══════ -->
+  <section class="audience-section" id="doi-tuong">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-semibold mb-2" style="color:var(--primary); letter-spacing:2px; font-size:0.8rem;">
+          Ai nên sử dụng dịch vụ?
+        </p>
+        <h2 class="section-title">Đối tượng <span>Phục vụ</span></h2>
+        <p class="section-subtitle">
+          Dịch vụ liên kết xuất bản dành cho mọi cá nhân và tổ chức có nhu cầu xuất bản sách.
+        </p>
+      </div>
+      <div class="row g-4 equal-height-row">
+        <div class="col-lg-4 col-md-6 fade-in">
+          <div class="glass-card-light audience-card">
+            <div class="audience-icon"><i class="bi bi-person-workspace"></i></div>
+            <h5>Cá nhân & Tác giả</h5>
+            <p>Nhà văn, chuyên gia, giảng viên, người có câu chuyện muốn chia sẻ hoặc xây dựng thương hiệu cá nhân qua sách.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in" style="transition-delay:0.1s;">
+          <div class="glass-card-light audience-card">
+            <div class="audience-icon"><i class="bi bi-building"></i></div>
+            <h5>Doanh nghiệp & Tổ chức</h5>
+            <p>Xuất bản sách truyền thông thương hiệu, tài liệu đào tạo nội bộ, sổ tay văn hóa doanh nghiệp.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in" style="transition-delay:0.2s;">
+          <div class="glass-card-light audience-card">
+            <div class="audience-icon"><i class="bi bi-bank"></i></div>
+            <h5>Cơ quan & Hiệp hội</h5>
+            <p>Xuất bản tài liệu chuyên ngành, kỷ yếu, ấn phẩm truyền thông phục vụ công tác quản lý và nghiên cứu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ CTA ═══════ -->
+  <section class="cta-section py-5">
+    <div class="container">
+      <div class="cta-glass text-center fade-in">
+        <h2>Bạn đã sẵn sàng <br>hiện thực hóa cuốn sách của mình?</h2>
+        <p>Liên hệ ngay để nhận tư vấn miễn phí từ đội ngũ chuyên gia xuất bản của NXB Lao Động.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="#lien-he" class="btn btn-hero-primary">
+            <i class="bi bi-send me-2"></i>Đăng ký tư vấn miễn phí
+          </a>
+          <a href="tel:02438515380" class="btn btn-hero-secondary">
+            <i class="bi bi-telephone me-2"></i>Gọi ngay: 024 3851 5380
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ Contact ═══════ -->
+  <section class="contact-section" id="lien-he">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-semibold mb-2" style="color:var(--primary); letter-spacing:2px; font-size:0.8rem;">
+          Liên hệ với chúng tôi
+        </p>
+        <h2 class="section-title">Đăng ký <span>Tư vấn</span></h2>
+        <p class="section-subtitle">
+          Điền thông tin bên dưới, chúng tôi sẽ liên hệ tư vấn trong vòng 24 giờ.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-7 fade-in-left">
+          <div class="contact-form-glass">
+            <form id="contactForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold" style="font-size:0.9rem;">Họ và tên *</label>
+                  <input type="text" class="form-control form-control-glass" placeholder="Nhập họ tên" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold" style="font-size:0.9rem;">Số điện thoại *</label>
+                  <input type="tel" class="form-control form-control-glass" placeholder="Nhập số điện thoại" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold" style="font-size:0.9rem;">Email</label>
+                  <input type="email" class="form-control form-control-glass" placeholder="Nhập email">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold" style="font-size:0.9rem;">Loại hình</label>
+                  <select class="form-select form-control-glass">
+                    <option selected>Chọn loại hình</option>
+                    <option>Cá nhân / Tác giả</option>
+                    <option>Doanh nghiệp</option>
+                    <option>Cơ quan / Tổ chức</option>
+                    <option>Khác</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-semibold" style="font-size:0.9rem;">Tên sách / Đề tài</label>
+                  <input type="text" class="form-control form-control-glass" placeholder="Nhập tên sách hoặc đề tài dự kiến">
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-semibold" style="font-size:0.9rem;">Mô tả nhu cầu</label>
+                  <textarea class="form-control form-control-glass" rows="4"
+                    placeholder="Mô tả ngắn về nội dung sách, số lượng in dự kiến, yêu cầu đặc biệt..."></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-submit w-100">
+                    <i class="bi bi-send me-2"></i>Gửi đăng ký tư vấn
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-5 fade-in-right">
+          <div class="glass-card-light contact-info-card d-flex align-items-center">
+            <i class="bi bi-geo-alt-fill"></i>
+            <div>
+              <h6 class="fw-bold mb-1" style="font-size:0.95rem;">Địa chỉ</h6>
+              <p class="text-muted mb-0" style="font-size:0.9rem;">Tầng 12 - Số 175 Đường Giảng Võ - Phường Ô Chợ Dừa - Thành phố Hà Nội</p>
+            </div>
+          </div>
+          <div class="glass-card-light contact-info-card d-flex align-items-center">
+            <i class="bi bi-telephone-fill"></i>
+            <div>
+              <h6 class="fw-bold mb-1" style="font-size:0.95rem;">Điện thoại</h6>
+              <p class="text-muted mb-0" style="font-size:0.9rem;">024 3851 5380</p>
+            </div>
+          </div>
+          <div class="glass-card-light contact-info-card d-flex align-items-center">
+            <i class="bi bi-envelope-fill"></i>
+            <div>
+              <h6 class="fw-bold mb-1" style="font-size:0.95rem;">Email</h6>
+              <p class="text-muted mb-0" style="font-size:0.9rem;">info@nxblaodong.com.vn</p>
+            </div>
+          </div>
+          <div class="glass-card-light contact-info-card d-flex align-items-center">
+            <i class="bi bi-globe2"></i>
+            <div>
+              <h6 class="fw-bold mb-1" style="font-size:0.95rem;">Website</h6>
+              <p class="text-muted mb-0" style="font-size:0.9rem;">www.nxblaodong.com.vn</p>
+            </div>
+          </div>
+          <div class="glass-card-light contact-info-card d-flex align-items-center">
+            <i class="bi bi-clock-fill"></i>
+            <div>
+              <h6 class="fw-bold mb-1" style="font-size:0.95rem;">Giờ làm việc</h6>
+              <p class="text-muted mb-0" style="font-size:0.9rem;">Thứ 2 – Thứ 6: 8:00 – 17:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ Footer ═══════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <img src="https://images.nxblaodong.com.vn/avatar/image-20221214111957476.svg" alt="NXB Lao Động"
+            height="40" class="mb-3" style="filter: brightness(0) invert(1);">
+          <p>
+            Nhà xuất bản Lao Động — Thành lập ngày 1/11/1945, trực thuộc Tổng Liên đoàn Lao động Việt Nam.
+            Hơn 80 năm đồng hành cùng hàng nghìn tác giả và đối tác trên toàn quốc.
+          </p>
+          <div class="mt-3">
+            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+            <a href="#" class="social-icon"><i class="bi bi-envelope"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6>Dịch vụ</h6>
+          <ul class="footer-links">
+            <li><a href="#dich-vu">Cấp giấy phép xuất bản</a></li>
+            <li><a href="#dich-vu">Xuất bản sách</a></li>
+            <li><a href="#dich-vu">Ấn phẩm điện tử</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6>Thông tin</h6>
+          <ul class="footer-links">
+            <li><a href="#gioi-thieu">Giới thiệu</a></li>
+            <li><a href="#quy-trinh">Quy trình</a></li>
+            <li><a href="#doi-tuong">Đối tượng</a></li>
+            <li><a href="#">Tin tức</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <h6>Liên hệ</h6>
+          <ul class="footer-links">
+            <li><i class="bi bi-geo-alt me-2" style="color:var(--accent);"></i>Tầng 12 - Số 175 Giảng Võ, Ô Chợ Dừa, Hà Nội</li>
+            <li><i class="bi bi-telephone me-2" style="color:var(--accent);"></i>024 3851 5380</li>
+            <li><i class="bi bi-envelope me-2" style="color:var(--accent);"></i>info@nxblaodong.com.vn</li>
+            <li><i class="bi bi-globe me-2" style="color:var(--accent);"></i>www.nxblaodong.com.vn</li>
+            <li><i class="bi bi-person-badge me-2" style="color:var(--accent);"></i>GĐ-TBT: Mai Thị Thanh Hằng</li>
+            <li><i class="bi bi-upc-scan me-2" style="color:var(--accent);"></i>MST: 0100110535</li>
+            <li><i class="bi bi-file-earmark-text me-2" style="color:var(--accent);"></i>GP: số 20/GP-XB ngày 21/5/1998</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0" style="font-size:0.85rem;">
+          © 2025 Nhà xuất bản Lao Động. Trực thuộc Tổng Liên đoàn Lao động Việt Nam.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scrollTop">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = 80;
+          const position = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: position, behavior: 'smooth' });
+          const navCollapse = document.getElementById('navContent');
+          const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+          if (bsCollapse) bsCollapse.hide();
+        }
+      });
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Counter animation
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseInt(counter.getAttribute('data-target'));
+          const duration = 2000;
+          const start = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+
+            if (target >= 1000) {
+              counter.textContent = current.toLocaleString('vi-VN') + '+';
+            } else {
+              counter.textContent = current + '+';
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            }
+          }
+
+          requestAnimationFrame(updateCounter);
+          counterObserver.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter').forEach(counter => {
+      counterObserver.observe(counter);
+    });
+
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-submit');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Đã gửi thành công!';
+      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = '';
+        this.reset();
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
